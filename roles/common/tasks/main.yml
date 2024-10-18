@@ -1,0 +1,10 @@
+---
+# tasks that need 'sudo'
+- block:
+  - include_tasks: packages.yml
+  - include_tasks: security.yml
+#  - include_tasks: displaylink-driver.yml
+  become: yes
+
+# tasks without sudo
+- include_tasks: homedir.yml

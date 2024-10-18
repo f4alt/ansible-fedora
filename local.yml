@@ -1,0 +1,7 @@
+---
+- name: Fresh Install Setup
+  hosts: localhost
+  gather_facts: true
+  connection: local
+  roles:
+    - common

@@ -1,0 +1,55 @@
+---
+- name: Ensure SSH host keys are generated
+  become: true
+  command: ssh-keygen -A
+  args:
+    creates: /etc/ssh/ssh_host_rsa_key
+  notify:
+    - Restart SSH
+
+- name: Start and enable firewalld
+  become: true
+  systemd:
+    name: firewalld
+    state: started
+    enabled: true
+
+- name: Allow HTTP and HTTPS through the firewall
+  become: true
+  firewalld:
+    service: "{{ item }}"
+    permanent: true
+    state: enabled
+    immediate: yes
+  notify:
+    - Restart firewalld
+  with_items:
+    - http
+    - https
+
+- name: Disable SSH Root Login /1
+  lineinfile:
+    create: no
+    path: /etc/ssh/sshd_config
+    regexp: (?i)^\s*PermitRootLogin yes\s+
+    state: absent
+  become: yes
+
+- name: Disable SSH Root Login /2
+  lineinfile:
+    create: yes
+    insertbefore: ^[#\s]*Match
+    line: PermitRootLogin no
+    path: /etc/ssh/sshd_config
+    state: present
+    validate: /usr/sbin/sshd -t -f %s
+  become: yes
+  notify:
+    - Restart SSH
+
+- name: Restart SSH
+  become: true
+  systemd:
+    name: sshd
+    state: restarted
+

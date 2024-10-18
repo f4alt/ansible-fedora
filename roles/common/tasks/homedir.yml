@@ -1,0 +1,28 @@
+---
+- name: Remove default user directories
+  become: true
+  file:
+    path: "{{ ansible_env.HOME }}/{{ item }}"
+    state: absent
+  with_items:
+    - "Documents"
+    - "Videos"
+    - "Pictures"
+    - "Music"
+    - "Public"
+    - "Templates"
+
+- name: Copy custom rc files
+  become: true
+  copy:
+    src: "files/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/{{ item }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+  with_items:
+    - ".bashrc"
+    - ".bash_aliases"
+    - ".tmux.conf"
+    - ".tmux.conf.local"
+    - ".tmux-pane-border.sh"
