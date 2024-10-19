@@ -4,7 +4,7 @@
   - include_tasks: packages.yml
   - include_tasks: security.yml
   - include_tasks: github-sshgen.yml
-  - include_tasks: keyboard-binding.yml
+  #  - include_tasks: keyboard-binding.yml
   - include_tasks: macos_theme.yml
 #  - include_tasks: displaylink-driver.yml
   become: yes

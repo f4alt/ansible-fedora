@@ -26,3 +26,4 @@
     - ".tmux.conf"
     - ".tmux.conf.local"
     - ".tmux-pane-border.sh"
+    - ".gitconfig"

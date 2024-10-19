@@ -151,6 +151,7 @@
       - tmux
       - zoxide
       - neovim
+      - keychain
       - cmake
       - make
       - g++
