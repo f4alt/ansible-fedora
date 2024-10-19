@@ -141,10 +141,7 @@
       - orca
       - spice-vdagent
       - xorg-x11-xauth
-      - avahi
-      - avahi-glib
       - avahi-gobject
-      - SDL2
       - SDL_image
       - freecell-solver-data
     state: absent
