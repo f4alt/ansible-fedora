@@ -11,10 +11,11 @@
 
 - name: Generate SSH key for GitHub if it doesn't exist
   command: ssh-keygen -t ed25519 -f "{{ ansible_env.HOME }}/.ssh/github" -C "christopherjmacgregor@gmail.com" -N ""
+  become_user: "{{ ansible_user }}"
   when: not github_ssh_key.stat.exists
 
 - name: Starting ssh agent and adding github.pub
-  shell: eval "$(ssh-agent)" && ssh-add ~/.ssh/github
+  shell: eval "$(ssh-agent)" && ssh-add "{{ ansible_env.HOME }}/.ssh/github"
 
 - name: Gather github.pub
   shell: cat "{{ ansible_env.HOME }}/.ssh/github.pub"
