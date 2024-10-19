@@ -5,6 +5,14 @@
     mode: '0755'
   tags: macos_theme
 
+- name: Copy .zip files to downloads
+  copy:
+    src: "{{ item }}"
+    dest: "{{ ansible_env.HOME }}/Downloads/"
+  with_fileglob:
+    - files/macos_theme/*.zip
+  tags: macos_theme
+
 - name: Execute the install script
   shell: "{{ ansible_env.HOME }}/install_macos_theme.sh"
   args:

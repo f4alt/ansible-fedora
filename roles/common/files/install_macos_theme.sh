@@ -2,6 +2,7 @@
 
 set -e
 
+HOME="/home/chris"
 # Unzip plasma themes
 unzip -o "$HOME/Downloads/plasma6macos-plasma-themes.zip" -d "$HOME/.local/share"
 
@@ -15,7 +16,9 @@ ln -sf "$HOME/.config/gtk-4.0/gtk-Dark.css" "$HOME/.config/gtk-4.0/gtk.css"
 unzip -o "$HOME/Downloads/plasma6macos-Kvantum.zip" -d "$HOME/.config"
 
 # Unzip icons
-unzip -o "$HOME/Downloads/plasma6macos-icons.zip" -d "$HOME/.local/share"
+#unzip -o "$HOME/Downloads/plasma6macos-icons.zip" -d "$HOME/.local/share"
+unzip -o "$HOME/Downloads/WhiteSur.zip" -d "$HOME/.local/share"
+unzip -o "$HOME/Downloads/WhiteSur-dark.zip" -d "$HOME/.local/share"
 
 # Unzip cursors
 unzip -o "$HOME/Downloads/plasma6macos-cursors.zip" -d "$HOME/.local/share"
@@ -73,7 +76,9 @@ sudo dnf install -y zsh
 
 # Install WhiteSur Firefox theme
 cd "$HOME/Downloads"
-git clone https://github.com/vinceliuice/WhiteSur-firefox-theme.git
+if [ ! -d "WhiteSur-firefox-theme" ]; then
+    git clone https://github.com/vinceliuice/WhiteSur-firefox-theme.git
+fi
 cd WhiteSur-firefox-theme
 ./install.sh -m
 

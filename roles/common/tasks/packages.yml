@@ -111,7 +111,6 @@
       - plasma-discover-packagekit
       - plasma-vault
       - spectacle
-      - flatpak
       - flatpak-kcm
       - ibus-anthy
       - ibus-anthy-python
