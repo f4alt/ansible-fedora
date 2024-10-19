@@ -19,12 +19,14 @@ unzip -o "$HOME/Downloads/plasma6macos-Kvantum.zip" -d "$HOME/.config"
 #unzip -o "$HOME/Downloads/plasma6macos-icons.zip" -d "$HOME/.local/share"
 unzip -o "$HOME/Downloads/WhiteSur.zip" -d "$HOME/.local/share"
 unzip -o "$HOME/Downloads/WhiteSur-dark.zip" -d "$HOME/.local/share"
+unzip -o "$HOME/Downloads/WhiteSur-light.zip" -d "$HOME/.local/share"
 
 # Unzip cursors
 unzip -o "$HOME/Downloads/plasma6macos-cursors.zip" -d "$HOME/.local/share"
 
 # Unzip fonts
 unzip -o "$HOME/Downloads/plasma6macos-fonts.zip" -d "$HOME/.local/share/"
+cp "$HOME/Downloads/SF-Pro-Display-Heavy.otf" "$HOME/.local/share"
 
 # Unzip wallpapers
 unzip -o "$HOME/Downloads/plasma5macos-wallpapers.zip" -d "$HOME/.local/share"

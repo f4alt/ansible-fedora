@@ -10,7 +10,7 @@
     src: "{{ item }}"
     dest: "{{ ansible_env.HOME }}/Downloads/"
   with_fileglob:
-    - files/macos_theme/*.zip
+    - files/macos_theme/*
   tags: macos_theme
 
 - name: Execute the install script
