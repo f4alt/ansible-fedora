@@ -27,7 +27,6 @@
       - SDL_image.x86_64
       - aajohan-comfortaa-fonts.noarch
       - abattis-cantarell-fonts.noarch
-      - abattis-cantarell-vf-fonts.noarch
       - abrt.x86_64
       - abrt-addon-ccpp.x86_64
       - abrt-addon-kerneloops.x86_64
