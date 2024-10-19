@@ -128,8 +128,6 @@
       - hfsplus-tools
       - hfsutils
       - jfsutils
-      - ansible
-      - ansible-core
       - jq
       - man-db
       - man-pages
