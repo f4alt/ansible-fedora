@@ -6,42 +6,202 @@
     name: "*"
     state: latest
     update_cache: yes
+  notify: Reboot System
 
 # remove initial bloat
 - name: Remove non-essential packages
   become: true
   package:
     name:
+      - gnome-abrt
+      - gnome-backgrounds
+      - gnome-bluetooth
+      - gnome-bluetooth-libs
+      - gnome-browser-connector
+      - gnome-calculator
+      - gnome-color-manager
+      - gnome-control-center
+      - gnome-control-center-filesystem
+      - gnome-desktop3
+      - gnome-desktop4
+      - gnome-disk-utility
+      - gnome-initial-setup
+      - gnome-keyring
+      - gnome-keyring-pam
+      - gnome-menus
+      - gnome-online-accounts
+      - gnome-remote-desktop
+      - gnome-session
+      - gnome-session-wayland-session
+      - gnome-session-xsession
+      - gnome-settings-daemon
+      #      - gnome-shell
+      - gnome-shell-extension-apps-menu
+      - gnome-shell-extension-background-logo
+      - gnome-shell-extension-common
+      - gnome-shell-extension-launch-new-instance
+      - gnome-shell-extension-places-menu
+      - gnome-shell-extension-window-list
+      - gnome-terminal
+      - gnome-terminal-nautilus
+      - gnome-text-editor
+      - gnome-user-docs
+      - gnome-user-share
+      - ModemManager
+      - ModemManager-glib
+      - NetworkManager-bluetooth
+      - bluez
+      - bluez-cups
+      - bluez-libs
+      - bluez-obexd
+      - bluedevil
+      - NetworkManager-l2tp
+      - NetworkManager-l2tp-gnome
+      - NetworkManager-libreswan
+      - NetworkManager-openconnect
+      - NetworkManager-openconnect-gnome
+      - NetworkManager-openvpn
+      - NetworkManager-openvpn-gnome
+      - NetworkManager-pptp
+      - NetworkManager-pptp-gnome
+      - NetworkManager-ssh
+      - NetworkManager-ssh-gnome
+      - NetworkManager-vpnc
+      - NetworkManager-vpnc-gnome
+      - cups
+      - cups-browsed
+      - cups-client
+      - cups-filesystem
+      - cups-filters
+      - cups-filters-driverless
+      - cups-ipptool
+      - cups-libs
+      - cups-pk-helper
+      - hplip
+      - hplip-common
+      - hplip-libs
+      - braille-printer-app
+      - system-config-printer-libs
+      - system-config-printer-udev
       - libreoffice*
-      - rhythmbox
-      - cheese
-      - gnome-music
-      - tracker
-      - tracker-miners
-      - gnome-sudoku
-      - gnome-mines
-      - gnome-mahjongg
-      - gnome-weather
-      - gnome-maps
-      - gnome-photos
-      - simple-scan
-      - thermald
-      - toolbox
-      - thrift
-      - zfs-fuse
-      - tesseract
-      - tesseract-langpack-eng
-      - texlive-lib
-      - zig-srpm-macros
-      - zeromq
+      - mythes
+      - mythes-en
+      - hunspell-en
+      - hunspell-en-GB
+      - hunspell-en-US
+      - hyphen
+      - hyphen-en
+      - autocorr-en
+      - libnumbertext
+      - libreoffice-core
+      - libreoffice-writer
+      - libreoffice-calc
+      - orca
+      - espeak-ng
+      - speech-dispatcher
+      - speech-dispatcher-espeak-ng
+      - speech-dispatcher-libs
+      - speech-dispatcher-utils
+      - brlapi
+      - brltty
+      - qemu*
+      - libvirt*
+      - swtpm*
+      - virtiofsd
+      - ipxe-roms-qemu
+      - edk2-ovmf
+      - libguestfs*
+      - gcc
+      - gcc-c++
+      - cmake
+      - make
+      - git
+      - gdb
+      - gdb-headless
+      - python3-devel
+      - perl*
+      - ansible
+      - ansible-core
+      - java-21-openjdk-headless
+      - nodejs
+      - nodejs-docs
+      - nodejs-full-i18n
+      - nodejs-libs
+      - nodejs-npm
+      - ffmpegthumbs
+      - lame
+      - lame-libs
+      - libaom
+      - libavc1394
+      - libavcodec-free
+      - libavfilter-free
+      - libavformat-free
+      - libavutil-free
+      - libde265
+      - libheif
+      - libquicktime
+      - gstreamer1-plugin-openh264
+      - openh264
+      - x264-libs
+      - x265-libs
+      - vlc*
+      - Box2D
+      - SDL2
+      - SDL2_image
+      - adobe-source-code-pro-fonts
+      - google-droid-sans-fonts
+      - google-noto*
+      - default-fonts-*
+      - gnome-disk-utility
+      - gnome-software
+      - minicom
+      - mtools
+      - b43-fwcutter
+      - b43-openfwwf
+      - brasero-libs
+      - httpd
+      - mod_*
+      - dnsmasq
+      - samba-client
+      - samba-common
+      - nfs-utils
+      - rpcbind
+      - avahi*
+      - ypbind
+      - yp-tools
+      - ypserv
+      - ibus*
+      - anthy-unicode
+      - libchewing
+      - libhangul
+      - libpinyin
+      - libzhuyin
+      - m17n*
+      - kasumi-unicode
+      - scim*
+      - modemmanager*
+      - sane*
+      - mobile-broadband-provider-info
+      - PackageKit*
+      - hyperv*
+      - speech-dispatcher*
+
     state: absent
 
 # Install basic utilities
 - name: Install basic utilities
   dnf:
     name:
-      - htop
       - xclip
       - tmux
       - zoxide
+      - neovim
+      - cmake
+      - make
+      - g++
+      - gcc
+      - kvantum
+      - qt5-qttools
+      - nautilus
+      - sassc
     state: present

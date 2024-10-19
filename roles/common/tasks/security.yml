@@ -44,12 +44,4 @@
     state: present
     validate: /usr/sbin/sshd -t -f %s
   become: yes
-  notify:
-    - Restart SSH
-
-- name: Restart SSH
-  become: true
-  systemd:
-    name: sshd
-    state: restarted
-
+  notify: Restart SSH

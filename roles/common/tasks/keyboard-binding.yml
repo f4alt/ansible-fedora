@@ -1,0 +1,36 @@
+---
+- name: Ensure library directory exists
+  file:
+    path: ./library
+    state: directory
+
+- name: Download gsetting module if not present
+  get_url:
+    url: "https://raw.githubusercontent.com/jistr/ansible-gsetting/master/library/gsetting.py"
+    dest: "./library/gsetting.py"
+  when: not lookup('file', './library/gsetting.py')
+
+- name: Ensure custom keybinding path exists
+  gsetting:
+    schema: org.gnome.settings-daemon.plugins.media-keys
+    key: custom-keybindings
+    value: "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+- name: Set name of the custom shortcut
+  gsetting:
+    schema: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+    key: name
+    value: 'Launch Terminal'
+
+- name: Set command for the custom shortcut (gnome-terminal)
+  gsetting:
+    schema: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+    key: command
+    value: 'gnome-terminal'
+
+- name: Set the keyboard binding for the custom shortcut (Ctrl+Alt+T)
+  gsetting:
+    schema: org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/
+    key: binding
+    value: '<Control><Alt>t'
+

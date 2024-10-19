@@ -1,0 +1,29 @@
+- name: Ensure SSH directory exists
+  file:
+    path: "{{ ansible_user_dir }}/.ssh"
+    state: directory
+    mode: '0700'
+
+- name: Check if GitHub SSH key exists
+  stat:
+    path: "{{ ansible_user_dir }}/.ssh/github"
+  register: github_ssh_key
+
+- name: Generate SSH key for GitHub if it doesn't exist
+  command: ssh-keygen -t ed25519 -f "{{ ansible_user_dir }}/.ssh/github" -C "christopherjmacgregor@gmail.com" -N ""
+  when: not github_ssh_key.stat.exists
+
+- name: Starting ssh agent and adding github.pub
+  shell: eval "$(ssh-agent)" && ssh-add ~/.ssh/github
+
+- name: Gather github.pub
+  shell: cat "{{ ansible_user_dir }}/.ssh/github.pub"
+  register: github_pubkey
+
+- name: Display github.pub ssh key
+  vars:
+    msg: |
+         {{ github_pubkey.stdout }}
+         https://github.com/settings/ssh/new
+  debug:
+    msg: "{{ msg.split('\n')[:-1] }}"

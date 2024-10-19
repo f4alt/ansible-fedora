@@ -1,0 +1,14 @@
+- name: Copy install script to user home
+  copy:
+    src: install_macos_theme.sh
+    dest: "{{ ansible_env.HOME }}/install_macos_theme.sh"
+    mode: '0755'
+  tags: macos_theme
+
+- name: Execute the install script
+  shell: "{{ ansible_env.HOME }}/install_macos_theme.sh"
+  args:
+    executable: /bin/bash
+  environment:
+    HOME: "{{ ansible_env.HOME }}"
+  tags: macos_theme

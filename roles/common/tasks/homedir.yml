@@ -4,7 +4,7 @@
   file:
     path: "{{ ansible_env.HOME }}/{{ item }}"
     state: absent
-  with_items:
+  loop:
     - "Documents"
     - "Videos"
     - "Pictures"
@@ -20,7 +20,7 @@
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0644'
-  with_items:
+  loop:
     - ".bashrc"
     - ".bash_aliases"
     - ".tmux.conf"
