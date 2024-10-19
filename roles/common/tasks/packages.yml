@@ -91,8 +91,8 @@
       - glib2.x86_64
       - glibc.x86_64
       - glibc-common.x86_64
-      - grep.x86_64
       - grub2-common.noarch
+      - grub2-efi-ia32.x86_64
       - grub2-efi-x64.x86_64
       - grub2-pc.x86_64
       - grub2-tools.x86_64
@@ -105,6 +105,7 @@
       - kernel.x86_64
       - kernel-core.x86_64
       - kernel-modules.x86_64
+      - konsole.x86_64
       - less.x86_64
       - libgcc.x86_64
       - libgcrypt.x86_64
@@ -129,6 +130,7 @@
       - pcre.x86_64
       - pcre2.x86_64
       - perl-interpreter.x86_64
+      - plasma-desktop.x86_64
       - policycoreutils.x86_64
       - polkit.x86_64
       - popt.x86_64
@@ -142,6 +144,9 @@
       - selinux-policy-targeted.noarch
       - setup.noarch
       - shadow-utils.x86_64
+      - shim-ia32.x86_64
+      - shim-x64.x86_64
+      - sudo.x86_64
       - systemd.x86_64
       - systemd-libs.x86_64
       - systemd-pam.x86_64
