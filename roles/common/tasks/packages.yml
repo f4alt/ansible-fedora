@@ -13,6 +13,7 @@
   become: true
   package:
     name:
+      - libreoffice*
 #      - ImageMagick
 #      - ImageMagick-libs
 #      - LibRaw
