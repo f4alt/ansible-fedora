@@ -23,4 +23,5 @@
     executable: /bin/bash
   environment:
     HOME: "{{ ansible_env.HOME }}"
+  become_user: "{{ ansible_user }}"
   tags: macos_theme
