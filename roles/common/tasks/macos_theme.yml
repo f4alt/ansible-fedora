@@ -47,11 +47,17 @@
       dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
     - src: files/plasma-org.kde.plasma.desktop-appletsrc
       dest: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    - src: files/defaults
-      dest: "{{ ansible_env.HOME }}/.local/share/plasma/look-and-feel/com.github.vinceliuice.McMojave/contents/defaults"
+#    - src: files/defaults
+#      dest: "{{ ansible_env.HOME }}/.local/share/plasma/look-and-feel/com.github.vinceliuice.McMojave/contents/defaults"
 
 - name: Apply lookandfeel McMojave
-  shell: lookandfeeltool -a com.github.vinceliuice.McMojave
+#  shell: lookandfeeltool -a com.github.vinceliuice.McMojave
+  shell: |
+    timeout 5 kquitapp5 plasmashell
+    pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x plasmashell
+    pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x -9 plasmashell
+    pgrep -U $USER -x plasmashell &>/dev/null && echo "ERROR: cannot kill plasmashell"
+    plasmashell &
   become_user: "{{ ansible_user }}"
 
 # TODO
