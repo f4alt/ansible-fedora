@@ -51,8 +51,8 @@
       dest: "{{ ansible_env.HOME }}/.local/share/plasma/look-and-feel/com.github.vinceliuice.McMojave/contents/defaults"
 
 - name: Apply lookandfeel McMojave
-#  shell: lookandfeeltool -a com.github.vinceliuice.McMojave
   shell: |
+    lookandfeeltool -a com.github.vinceliuice.McMojave
     timeout 5 kquitapp5 plasmashell
     pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x plasmashell
     pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x -9 plasmashell
