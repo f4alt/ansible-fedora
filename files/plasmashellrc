@@ -14,6 +14,20 @@ floating=1
 [PlasmaViews][Panel 2][Defaults]
 thickness=44
 
+[PlasmaViews][Panel 27]
+alignment=1
+floating=1
+
+[PlasmaViews][Panel 27][Defaults]
+maxLength=1536
+minLength=1536
+offset=0
+thickness=32
+
+[PlasmaViews][Panel 27][Horizontal5120]
+maxLength=1536
+minLength=1536
+
 [PlasmaViews][Panel 28]
 alignment=1
 floating=1
@@ -28,6 +42,20 @@ thickness=32
 maxLength=1728
 minLength=1728
 
+[PlasmaViews][Panel 47]
+alignment=1
+floating=1
+
+[PlasmaViews][Panel 47][Defaults]
+maxLength=2160
+minLength=2160
+offset=0
+thickness=36
+
+[PlasmaViews][Panel 47][Horizontal5120]
+maxLength=2160
+minLength=2160
+
 [PlasmaViews][Panel 53]
 alignment=1
 floating=1
@@ -41,6 +69,13 @@ thickness=32
 [PlasmaViews][Panel 53][Horizontal5120]
 maxLength=1920
 minLength=1920
+
+[PlasmaViews][Panel 73]
+floating=1
+panelLengthMode=1
+
+[PlasmaViews][Panel 73][Defaults]
+thickness=120
 
 [PlasmaViews][Panel 76]
 floating=1

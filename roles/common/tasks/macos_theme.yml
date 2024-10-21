@@ -40,8 +40,11 @@
   become_user: "{{ ansible_user }}"
 
 - name: Run WhiteSur-icon-theme install script
-  shell: ./install.sh
+  shell: ./install.sh -t default
   args:
     chdir: "{{ ansible_env.HOME }}/WhiteSur-icon-theme"
     executable: /bin/bash
   become_user: "{{ ansible_user }}"
+
+  #- name: Cleanup installed git repos
+  #TODO
