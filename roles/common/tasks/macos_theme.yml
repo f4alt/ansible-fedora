@@ -2,6 +2,8 @@
   copy:
     src: files/plasmashellrc
     dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
 
 - name: Clone McMojave-kde repository
   git:
@@ -28,7 +30,6 @@
   loop:
     - src: files/plasmashellrc
       dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
-  become: no
 
 - name: Clone WhiteSur-icon-theme repository
   git:
@@ -43,5 +44,4 @@
   args:
     chdir: "{{ ansible_env.HOME }}/WhiteSur-icon-theme"
     executable: /bin/bash
-  become: no
   become_user: "{{ ansible_user }}"
