@@ -3,3 +3,5 @@
 	name = f4alt
 [core]
 	editor = nvim
+[push]
+	default = current
