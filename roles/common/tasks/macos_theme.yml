@@ -20,17 +20,6 @@
     executable: /bin/bash
   become_user: "{{ ansible_user }}"
 
-- name: Copy configuration files
-  copy:
-    src: "{{ item.src }}"
-    dest: "{{ item.dest }}"
-    owner: "{{ ansible_user }}"
-    group: "{{ ansible_user }}"
-    mode: '0644'
-  loop:
-    - src: files/plasmashellrc
-      dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
-
 - name: Clone WhiteSur-icon-theme repository
   git:
     repo: https://github.com/vinceliuice/WhiteSur-icon-theme.git
@@ -46,5 +35,18 @@
     executable: /bin/bash
   become_user: "{{ ansible_user }}"
 
+- name: Copy configuration files
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+  loop:
+    - src: files/plasmashellrc
+      dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
+    - src: files/plasma-org.kde.plasma.desktop-appletsrc
+      dest: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
+
+# TODO
   #- name: Cleanup installed git repos
-  #TODO
