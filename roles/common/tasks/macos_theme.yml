@@ -61,11 +61,11 @@
   become_user: "{{ ansible_user }}"
 
 - name: Cleanup installed git repos
-    file:
-      path: "{{ item }}"
-      state: absent
-    become: no
-    become_user: "{{ ansible_user }}"
-    loop:
-      - "{{ ansible_env.HOME }}/McMojave-kde"
-      - "{{ ansible_env.HOME }}/WhiteSur-icon-theme"
+  file:
+    path: "{{ item }}"
+    state: absent
+  become: no
+  become_user: "{{ ansible_user }}"
+  loop:
+    - "{{ ansible_env.HOME }}/McMojave-kde"
+    - "{{ ansible_env.HOME }}/WhiteSur-icon-theme"
