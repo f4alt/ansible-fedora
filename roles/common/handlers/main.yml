@@ -16,3 +16,9 @@
     reboot_timeout: 600
     pre_reboot_delay: 0
     post_reboot_delay: 30
+
+- name: Logout KDE Session
+  shell: qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout || true
+  args:
+    executable: /bin/bash
+  become: no

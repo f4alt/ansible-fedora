@@ -1,27 +1,248 @@
-- name: Copy install script to user home
-  copy:
-    src: install_macos_theme.sh
-    dest: "{{ ansible_env.HOME }}/install_macos_theme.sh"
+---
+- name: Unzip plasma themes
+  unarchive:
+    src: "files/macos_theme/plasma6macos-plasma-themes.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0755'
-  tags: macos_theme
+    remote_src: yes  # Indicates the archive is on the remote machine
+    extra_opts: ['-o']  # Overwrite files without prompting
+  become: no  # Run as the ansible_user to avoid permission issues
 
-- name: Copy .zip files to downloads
-  copy:
-    src: "{{ item }}"
-    dest: "{{ ansible_env.HOME }}/Downloads/"
+- name: Unzip GTK theme config
+  unarchive:
+    src: "files/macos_theme/plasma6macos-gtk-theme-config.zip"
+    dest: "{{ ansible_env.HOME }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
-  with_fileglob:
-    - files/macos_theme/*
-  tags: macos_theme
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
 
-- name: Execute the install script
-  shell: "{{ ansible_env.HOME }}/install_macos_theme.sh"
+- name: Set GTK theme to dark mode
+  file:
+    src: "{{ ansible_env.HOME }}/.config/gtk-4.0/gtk-Dark.css"
+    dest: "{{ ansible_env.HOME }}/.config/gtk-4.0/gtk.css"
+    state: link
+    force: yes
+  become: no
+
+- name: Unzip Kvantum theme
+  unarchive:
+    src: "files/macos_theme/plasma6macos-Kvantum.zip"
+    dest: "{{ ansible_env.HOME }}/.config"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip icon themes
+  unarchive:
+    src: "files/macos_theme/{{ item }}"
+    dest: "{{ ansible_env.HOME }}/.local/share"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  loop:
+    - WhiteSur.zip
+    - WhiteSur-dark.zip
+    - WhiteSur-light.zip
+  become: no
+
+- name: Unzip cursors
+  unarchive:
+    src: "files/macos_theme/plasma6macos-cursors.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip fonts
+  unarchive:
+    src: "files/macos_theme/plasma6macos-fonts.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Copy SF-Pro-Display-Heavy.otf to .local/share
+  copy:
+    src: "files/macos_theme/SF-Pro-Display-Heavy.otf"
+    dest: "{{ ansible_env.HOME }}/.local/share/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
+  become: no
+
+- name: Unzip wallpapers
+  unarchive:
+    src: "files/macos_theme/plasma5macos-wallpapers.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip plasmoids and widgets
+  unarchive:
+    src: "files/macos_theme/plasma6macos-plasmoids-widgets.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share/plasma"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip KWin themes
+  unarchive:
+    src: "files/macos_theme/plasma6macos-kwin.zip"
+    dest: "{{ ansible_env.HOME }}/.local/share/plasma"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip SDDM theme
+  unarchive:
+    src: "files/macos_theme/plasma6macos-sddm.zip"
+    dest: "/"
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: yes  # Requires root privileges
+
+- name: Install Plymouth themes
+  dnf:
+    name:
+      - plymouth
+      - plymouth-theme-script
+    state: present
+  become: yes
+
+- name: Unzip Plymouth theme
+  unarchive:
+    src: "files/macos_theme/plasma6macos-plymouth-theme.zip"
+    dest: "/usr/share/plymouth/themes"
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: yes
+
+- name: Set default Plymouth theme to macOS
+  command: plymouth-set-default-theme -R macOS
+  become: yes
+
+- name: Quit Plasma shell
+  shell: kquitapp6 plasmashell || true
   args:
     executable: /bin/bash
-  environment:
-    HOME: "{{ ansible_env.HOME }}"
+  become: no
+
+- name: Unzip KDE config
+  unarchive:
+    src: "files/macos_theme/plasma6macos-kdeconfig.zip"
+    dest: "{{ ansible_env.HOME }}/.config"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Start Plasma shell
+  shell: kstart plasmashell &> /dev/null &
+  args:
+    executable: /bin/bash
+  become: no
+  notify: Logout KDE Session
+
+  #- name: Logout KDE session
+  #  shell: qdbus-qt6 org.kde.Shutdown /Shutdown org.kde.Shutdown.logout || true
+  #  args:
+  #    executable: /bin/bash
+  #  become: no
+
+- name: Add Albert repository
+  get_url:
+    url: https://download.opensuse.org/repositories/home:manuelschneid3r/Fedora_40/home:manuelschneid3r.repo
+    dest: /etc/yum.repos.d/
+    mode: '0644'
+  become: yes
+
+- name: Install Albert launcher
+  dnf:
+    name: albert
+    state: present
+  become: yes
+
+- name: Unzip Albert launcher config
+  unarchive:
+    src: "files/macos_theme/albert-launcher-config.zip"
+    dest: "{{ ansible_env.HOME }}"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: no
+
+- name: Unzip Albert themes
+  unarchive:
+    src: "files/macos_theme/albert-theme-Light-Dark.zip"
+    dest: "/usr/share/albert/widgetsboxmodel/themes/"
+    owner: root
+    group: root
+    mode: '0755'
+    remote_src: yes
+    extra_opts: ['-o']
+  become: yes
+
+  #- name: Install Zsh
+  #  dnf:
+  #    name: zsh
+  #    state: present
+  #  become: yes
+
+- name: Clone WhiteSur Firefox theme repository
+  git:
+    repo: https://github.com/vinceliuice/WhiteSur-firefox-theme.git
+    dest: "files/macos_theme/WhiteSur-firefox-theme"
+    update: yes
+    version: main
+  become: no
   become_user: "{{ ansible_user }}"
-  tags: macos_theme
+
+- name: Install WhiteSur Firefox theme
+  shell: "./install.sh -m"
+  args:
+    chdir: "files/macos_theme/WhiteSur-firefox-theme"
+    executable: /bin/bash
+  become: no
+  become_user: "{{ ansible_user }}"
+
+- name: Apply MacSequoiaDark color scheme
+  command: plasma-apply-colorscheme MacSequoiaDark
+  become: no
+  become_user: "{{ ansible_user }}"
+
