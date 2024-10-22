@@ -14,6 +14,7 @@
   package:
     name:
       - "@LibreOffice"
+      - libreoffice*
       - akregator 
       - ark
       - akonadi-contacts
@@ -63,6 +64,7 @@
       - zoxide
       - neovim
       - keychain
+      - gnome-boxes
       - cmake
       - make
       - g++
