@@ -12,3 +12,7 @@
 # tasks without sudo
 - include_tasks: macos_theme.yml
 - include_tasks: homedir.yml
+
+# must be last
+- import_tasks: secure_boot_key.yml
+  become: yes

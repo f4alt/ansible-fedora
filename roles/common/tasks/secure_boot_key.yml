@@ -1,0 +1,67 @@
+- name: Install mokutil package
+  dnf:
+    name: mokutil
+    state: present
+
+- name: Create directory for module signing keys
+  file:
+    path: /root/module-signing
+    state: directory
+    mode: '0700'
+    owner: root
+    group: root
+
+- name: Generate private and public key for module signing
+  command: >
+    openssl req -new -x509 -newkey rsa:2048
+    -keyout /root/module-signing/MOK.priv
+    -outform DER
+    -out /root/module-signing/MOK.der
+    -nodes
+    -days 36500
+    -subj "/CN=My Secure Boot MOK"
+  args:
+    creates: /root/module-signing/MOK.der
+
+- name: Import MOK key for Secure Boot
+  expect:
+    command: mokutil --import /root/module-signing/MOK.der -N ""
+    responses:
+      'Enter password:': "password\n"
+      'Confirm password:': "password\n"
+  no_log: false
+  register: mokutil_result
+  ignore_errors: yes
+
+- name: Prompt for reboot to enroll MOK key
+  debug:
+    msg: |
+      The MOK key has been generated and needs to be enrolled.
+      Please reboot the system and follow the prompts to enroll the key.
+      After rebooting, re-run this playbook to complete the setup.
+  when: mokutil_result.rc == 0
+
+- name: Pause for user to reboot and enroll MOK key
+  pause:
+    prompt: "Press Enter to continue after reboot and MOK enrollment is complete."
+  when: mokutil_result.rc == 0
+
+- name: Create sign_helper.sh script
+  copy:
+    dest: /etc/dkms/sign_helper.sh
+    content: |
+      #!/bin/sh
+      /usr/src/kernels/$(uname -r)/scripts/sign-file sha256 /root/module-signing/MOK.priv /root/module-signing/MOK.der $1 $2
+    owner: root
+    group: root
+    mode: '0755'
+
+- name: Update DKMS framework configuration
+  lineinfile:
+    path: /etc/dkms/framework.conf
+    regexp: '^POST_BUILD='
+    line: 'POST_BUILD=("/etc/dkms/sign_helper.sh")'
+    create: yes
+
+- name: Rebuild initramfs
+  command: dracut -f
