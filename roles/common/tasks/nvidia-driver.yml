@@ -1,0 +1,19 @@
+- name: Install RPM Fusion free and nonfree repositories
+  dnf:
+    name:
+      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-40.noarch.rpm"
+      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-40.noarch.rpm"
+    state: present
+    disable_gpg_check: yes
+
+- name: Install kernel development packages
+  dnf:
+    name:
+      - kernel-devel
+      - kernel-headers
+    state: present
+
+- name: Install akmod-nvidia package
+  dnf:
+    name: akmod-nvidia
+    state: present

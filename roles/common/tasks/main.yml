@@ -6,6 +6,7 @@
   - include_tasks: github-sshgen.yml
   #  - include_tasks: keyboard-binding.yml
 #  - include_tasks: displaylink-driver.yml
+  - include_tasks: nvidia-driver.yml
   become: yes
 
 # tasks without sudo
