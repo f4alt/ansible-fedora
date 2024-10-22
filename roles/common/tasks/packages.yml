@@ -13,7 +13,7 @@
   become: true
   package:
     name:
-      - @LibreOffice
+      - "@LibreOffice"
       - akregator 
       - ark
       - akonadi-contacts
