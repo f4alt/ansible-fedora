@@ -20,7 +20,7 @@
       - plasma-discover
       - elisa-player
       - dragon
-      - drkonqi
+      - plasma-drkonqi
       - emoji*
       - mediawriter
       - filelight
