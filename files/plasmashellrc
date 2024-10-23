@@ -71,6 +71,7 @@ maxLength=1920
 minLength=1920
 
 [PlasmaViews][Panel 73]
+alignment=132
 floating=1
 panelLengthMode=1
 panelVisibility=1
