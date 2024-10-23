@@ -44,6 +44,12 @@
       dest: "{{ ansible_env.HOME }}/.local/share/plasma/look-and-feel/com.github.vinceliuice.McMojave/contents/defaults"
     - src: files/kdeglobals
       dest: "{{ ansible_env.HOME }}/.config/kdeglobals"
+    - src: files/konsolerc
+      dest: "{{ ansible_env.HOME }}/.config/konsolerc"
+    - src: files/default.profile
+      dest: "{{ ansible_env.HOME }}/.local/share/konsole/default.profile"
+    - src: files/penguin.png
+      dest: "{{ ansible_env.HOME }}/.local/share/wallpapers/penguin.png"
 
 - name: Apply lookandfeel McMojave
   shell: |

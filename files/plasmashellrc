@@ -73,9 +73,10 @@ minLength=1920
 [PlasmaViews][Panel 73]
 floating=1
 panelLengthMode=1
+panelVisibility=1
 
 [PlasmaViews][Panel 73][Defaults]
-thickness=120
+thickness=80
 
 [PlasmaViews][Panel 76]
 floating=1
