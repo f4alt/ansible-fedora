@@ -384,6 +384,13 @@ bind C- send-prefix
 # move status line to top
 #set -g status-position top
 
+# custom indicator pane
+set -g pane-border-status top
+set -g pane-border-format '#(sh ~/.tmux-pane-border.sh \
+  --pane-current-path=#{pane_current_path} \
+  --pane-active=#{pane_active})'
+set -s status-interval 1
+
 
 # -- tpm -----------------------------------------------------------------------
 
