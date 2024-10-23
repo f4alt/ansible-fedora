@@ -5,13 +5,15 @@
   - include_tasks: security.yml
   - include_tasks: github-sshgen.yml
   #  - include_tasks: keyboard-binding.yml
-#  - include_tasks: displaylink-driver.yml
+  - include_tasks: displaylink-driver.yml
   - include_tasks: nvidia-driver.yml
   become: yes
 
 # tasks without sudo
-- include_tasks: macos_theme.yml
-- include_tasks: homedir.yml
+- block:
+  - include_tasks: macos_theme.yml
+  - include_tasks: homedir.yml
+  become: no
 
 # must be last
 - import_tasks: secure_boot_key.yml

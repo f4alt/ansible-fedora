@@ -6,14 +6,15 @@
     state: present
     disable_gpg_check: yes
 
-- name: Install kernel development packages
+- name: Install nvidia packages
   dnf:
     name:
+      - kernel-headers 
       - kernel-devel
-      - kernel-headers
+      - akmod-nvidia
+      - xorg-x11-drv-nvidia
+      - xorg-x11-drv-nvidia-libs
     state: present
 
-- name: Install akmod-nvidia package
-  dnf:
-    name: akmod-nvidia
-    state: present
+- name: Compile kernel modules
+  command: akmods --force

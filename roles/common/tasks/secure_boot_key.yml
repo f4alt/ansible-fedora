@@ -1,6 +1,8 @@
-- name: Install mokutil package
+- name: Install packages for self signing
   dnf:
-    name: mokutil
+    name:
+      - mokutil
+      - dracut
     state: present
 
 - name: Create directory for module signing keys
@@ -25,7 +27,7 @@
 
 - name: Import MOK key for Secure Boot
   expect:
-    command: mokutil --import /root/module-signing/MOK.der -N ""
+    command: mokutil --import /root/module-signing/MOK.der
     responses:
       'Enter password:': "password\n"
       'Confirm password:': "password\n"
@@ -45,6 +47,12 @@
   pause:
     prompt: "Press Enter to continue after reboot and MOK enrollment is complete."
   when: mokutil_result.rc == 0
+
+- name: ensure /etc/dkms exists for sign_helper.sh
+  file:
+    path: /etc/dkms
+    state: directory
+    recurse: yes
 
 - name: Create sign_helper.sh script
   copy:

@@ -1,0 +1,5 @@
+- name: Download displaylink-rpm file from github release
+  dnf:
+    name: "https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v6.0.0-1/fedora-40-displaylink-1.14.6-1.github_evdi.x86_64.rpm"
+    state: present
+    disable_gpg_check: yes
