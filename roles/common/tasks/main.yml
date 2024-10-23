@@ -1,20 +1,16 @@
 ---
 # tasks that need 'sudo'
 - block:
-  - include_tasks: packages.yml
-  - include_tasks: security.yml
-  - include_tasks: github-sshgen.yml
+  - import_tasks: packages.yml
+  - import_tasks: security.yml
+  - import_tasks: github-sshgen.yml
   #  - include_tasks: keyboard-binding.yml
-  - include_tasks: displaylink-driver.yml
-  - include_tasks: nvidia-driver.yml
+  - import_tasks: displaylink-driver.yml
+  - import_tasks: nvidia-driver.yml
   become: yes
 
 # tasks without sudo
 - block:
-  - include_tasks: macos_theme.yml
-  - include_tasks: homedir.yml
+  - import_tasks: macos_theme.yml
+  - import_tasks: homedir.yml
   become: no
-
-# must be last
-- import_tasks: secure_boot_key.yml
-  become: yes

@@ -3,5 +3,6 @@
   hosts: localhost
   gather_facts: true
   connection: local
-  roles:
-    - common
+  tasks:
+    - import_role:
+        name: common

@@ -1,5 +1,14 @@
-- name: Download displaylink-rpm file from github release
+- name: dnf copr enable crashdummy/Displaylink
+  command:
+    cmd: dnf copr enable -y crashdummy/Displaylink
+
+- name: Update packages after copr enable
   dnf:
-    name: "https://github.com/displaylink-rpm/displaylink-rpm/releases/download/v6.0.0-1/fedora-40-displaylink-1.14.6-1.github_evdi.x86_64.rpm"
+    name: "*"
+    state: latest
+    update_cache: yes
+
+- name: Install displaylink driver
+  dnf:
+    name: displaylink
     state: present
-    disable_gpg_check: yes

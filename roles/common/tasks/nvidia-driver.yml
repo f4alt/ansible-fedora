@@ -1,20 +1,41 @@
+# https://www.reddit.com/r/Fedora/comments/18bj1kt/fedora_nvidia_secure_boot/
+
 - name: Install RPM Fusion free and nonfree repositories
   dnf:
     name:
-      - "https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-40.noarch.rpm"
-      - "https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-40.noarch.rpm"
+      - "https://download1.rpmfusion.org/free/fedora/rpmfusion-free-release-{{ ansible_distribution_major_version }}.noarch.rpm"
+      - "https://download1.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
     disable_gpg_check: yes
 
-- name: Install nvidia packages
+- import_tasks: self_sign_key.yml
+
+- name: Reboot 1
+  debug:
+    msg: Resuming after MOK enrollment
+
+- name: Install driver packages
   dnf:
     name:
-      - kernel-headers 
+      - gcc
+      - kernel-headers
       - kernel-devel
       - akmod-nvidia
       - xorg-x11-drv-nvidia
-      - xorg-x11-drv-nvidia-libs
+      - xorg-x11-drv-nvidia-libs 
     state: present
+
+- name: Wait until modinfo builds nvidia driver
+  shell: modinfo -F version nvidia
+  register: result
+  until: result.stdout.find("ERROR") == -1	# until we dont see 'modinfo: ERROR: Module nvidia not found'
+  retries: 20
+  delay: 20
 
 - name: Compile kernel modules
   command: akmods --force
+  become: yes
+
+- name: Check boot image
+  command: dracut --force
+  become: yes

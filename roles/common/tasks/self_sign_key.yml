@@ -1,0 +1,31 @@
+- name: Install driver packages
+  dnf:
+    name:
+      - kmodtool
+      - akmod-nvidia
+      - mokutil
+      - openssl
+    state: present
+
+- name: Generate private and public key for module signing
+  command: kmodgenca -a
+
+- name: Import MOK key for Secure Boot
+  command: mokutil --import /etc/pki/akmods/certs/public_key.der
+  args:
+    stdin: "password\npassword\n"
+  become: yes
+  ignore_errors: yes
+
+- name: Prompt for reboot to enroll MOK key
+  vars:
+    msg: |
+      The MOK key has been generated and needs to be enrolled.
+      Please reboot the system and follow the prompts to enroll the key.
+      After rebooting, re-run this playbook with --start-at-task='Reboot 1'
+  debug:
+    msg: "{{ msg.split('\n')[:-1] }}"
+
+- name: MOK Reboot
+  pause:
+    prompt: "Press Enter to continue after reboot and MOK enrollment is complete."
