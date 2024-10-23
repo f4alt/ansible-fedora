@@ -409,14 +409,14 @@ plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
 [Containments][92][ConfigDialog]
-DialogHeight=844
-DialogWidth=1489
+DialogHeight=947
+DialogWidth=1714
 
 [Containments][92][Wallpaper][org.kde.image][General]
 Color=0,0,0
 FillMode=6
-Image=/home/chris/.local/share/wallpapers/penguin.png
-PreviewImage=/home/chris/.local/share/wallpapers/penguin.png
+Image=/home/chris/Downloads/penguin.png
+PreviewImage=/home/chris/Downloads/penguin.png
 SlidePaths=/home/chris/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [Containments][93]
@@ -428,6 +428,17 @@ location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
 
+[Containments][93][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Containments][93][Wallpaper][org.kde.image][General]
+Color=0,0,0
+FillMode=6
+Image=/home/chris/Downloads/penguin.png
+PreviewImage=/home/chris/Downloads/penguin.png
+SlidePaths=/home/chris/.local/share/wallpapers/,/usr/share/wallpapers/
+
 [Containments][94]
 activityId=68729f99-ce67-405f-8aba-179f7c059b98
 formfactor=0
@@ -436,6 +447,17 @@ lastScreen=2
 location=0
 plugin=org.kde.plasma.folder
 wallpaperplugin=org.kde.image
+
+[Containments][94][ConfigDialog]
+DialogHeight=540
+DialogWidth=720
+
+[Containments][94][Wallpaper][org.kde.image][General]
+Color=0,0,0
+FillMode=6
+Image=/home/chris/Downloads/penguin.png
+PreviewImage=/home/chris/Downloads/penguin.png
+SlidePaths=/home/chris/.local/share/wallpapers/,/usr/share/wallpapers/
 
 [ScreenMapping]
 itemsOnDisabledScreens=
