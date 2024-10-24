@@ -21,4 +21,4 @@
     group: "{{ ansible_user }}"
     mode: '0644'
   with_fileglob:
-    - "files/config/*"
+    - "files/homedir/*"
