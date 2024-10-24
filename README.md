@@ -1,5 +1,4 @@
-ansible-playbook -i inventory/hosts -c local local.yml --ask-become-pass
+ansible-playbook -i inventory/hosts -c local local.yml
 
-ansible-pull -U https://github.com/f4alt/ansible-fedora.git --ask-become-pass -i localhost -e ansible_user=chris
-
---start-at-task='Update DKMS framework configuration'
+ansible-pull -U https://github.com/f4alt/ansible-fedora.git
+ansible-pull -U https://github.com/f4alt/ansible-fedora.git --purge --start-at-task='Reboot 1'

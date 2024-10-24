@@ -9,24 +9,27 @@
 - name: Check if GitHub SSH key exists
   stat:
     path: "{{ ansible_env.HOME }}/.ssh/github"
-  register: github_ssh_key
+  register: github_sshkey
+
+- name: Check if public server ssh key exists
+  stat:
+    path: "{{ ansible_env.HOME }}/.ssh/public_server"
+  register: public_server_sshkey
 
 - name: Generate SSH key for GitHub if it doesn't exist
-  command: ssh-keygen -t ed25519 -f "{{ ansible_env.HOME }}/.ssh/github" -C "christopherjmacgregor@gmail.com" -N ""
+  command: ssh-keygen -t ed25519 -f "{{ ansible_env.HOME }}/.ssh/github" -C "christopherjmacgregor@gmail.com" -N "{{ github_ssh_password }}"
   become_user: "{{ ansible_user }}"
-  when: not github_ssh_key.stat.exists
+  when: not github_sshkey.stat.exists
 
-- name: Starting ssh agent and adding github.pub
-  shell: eval "$(ssh-agent)" && ssh-add "{{ ansible_env.HOME }}/.ssh/github"
+- name: Generate SSH key for public servers if it doesn't exist
+  command: ssh-keygen -t ed25519 -f "{{ ansible_env.HOME }}/.ssh/public_server" -C "christopherjmacgregor@gmail.com" -N "{{ public_server_ssh_password }}"
+  become_user: "{{ ansible_user }}"
+  when: not public_server_sshkey.stat.exists
 
-- name: Gather github.pub
-  shell: cat "{{ ansible_env.HOME }}/.ssh/github.pub"
-  register: github_pubkey
+# keys are managed via keychain and auto start via bashrc
 
-- name: Display github.pub ssh key
+- name: Remind where keys are
   vars:
-    msg: |
-         {{ github_pubkey.stdout }}
-         https://github.com/settings/ssh/new
+    msg: "SSH keys generated in ~/.ssh"
   debug:
     msg: "{{ msg.split('\n')[:-1] }}"

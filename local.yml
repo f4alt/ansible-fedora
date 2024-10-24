@@ -1,6 +1,18 @@
 ---
 - name: Fresh Install Setup
   hosts: localhost
+  vars_prompt:
+    - name: ansible_user
+      prompt: computer's username
+      private: false  # dont hide characters when typing
+    - name: ansible_become_password
+      prompt: sudo password
+    - name: github_ssh_password
+      prompt: github ssh key password
+    - name: public_server_ssh_password
+      prompt: public server ssh key password
+    - name: secure_boot_MOK
+      prompt: secure boot MOK key password
   gather_facts: true
   connection: local
   tasks:
