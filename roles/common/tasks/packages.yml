@@ -6,7 +6,8 @@
     name: "*"
     state: latest
     update_cache: yes
-  notify: Reboot System
+
+# help prompt
 
 # remove initial bloat
 - name: Remove non-essential packages
