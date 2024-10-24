@@ -3,14 +3,13 @@
 - block:
   - import_tasks: packages.yml
   - import_tasks: security.yml
-  - import_tasks: github-sshgen.yml
-  #  - include_tasks: keyboard-binding.yml
-  - import_tasks: displaylink-driver.yml
-  - import_tasks: nvidia-driver.yml
+  - import_tasks: gen_sshkeys.yml
+  - import_tasks: displaylink_driver.yml
+  - import_tasks: nvidia_driver.yml
   become: yes
 
 # tasks without sudo
 - block:
-  - import_tasks: macos_theme.yml
+  - import_tasks: kde_theme.yml
   - import_tasks: homedir.yml
   become: no
