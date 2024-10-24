@@ -36,19 +36,19 @@
     group: "{{ ansible_user }}"
     mode: '0644'
   loop:
-    - src: files/plasmashellrc
+    - src: files/theme/plasmashellrc
       dest: "{{ ansible_env.HOME }}/.config/plasmashellrc"
-    - src: files/plasma-org.kde.plasma.desktop-appletsrc
+    - src: files/theme/plasma-org.kde.plasma.desktop-appletsrc
       dest: "{{ ansible_env.HOME }}/.config/plasma-org.kde.plasma.desktop-appletsrc"
-    - src: files/defaults
+    - src: files/theme/defaults
       dest: "{{ ansible_env.HOME }}/.local/share/plasma/look-and-feel/com.github.vinceliuice.McMojave/contents/defaults"
-    - src: files/kdeglobals
+    - src: files/theme/kdeglobals
       dest: "{{ ansible_env.HOME }}/.config/kdeglobals"
-    - src: files/konsolerc
+    - src: files/theme/konsolerc
       dest: "{{ ansible_env.HOME }}/.config/konsolerc"
-    - src: files/default.profile
+    - src: files/theme/default.profile
       dest: "{{ ansible_env.HOME }}/.local/share/konsole/default.profile"
-    - src: files/penguin.png
+    - src: files/theme/penguin.png
       dest: "{{ ansible_env.HOME }}/.local/share/wallpapers/penguin.png"
 
 - name: Apply lookandfeel McMojave

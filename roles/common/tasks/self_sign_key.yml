@@ -12,7 +12,7 @@
 
 - name: Import MOK key for Secure Boot
   command: mokutil --import /etc/pki/akmods/certs/public_key.der
-  vars_prompt:
+  args:
     stdin: "{{ secure_boot_MOK }}\n{{ secure_boot_MOK }}\n"
   become: yes
   ignore_errors: yes

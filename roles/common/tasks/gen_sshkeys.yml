@@ -30,6 +30,7 @@
 
 - name: Remind where keys are
   vars:
-    msg: "SSH keys generated in ~/.ssh"
+    msg: |
+      SSH keys generated in ~/.ssh
   debug:
     msg: "{{ msg.split('\n')[:-1] }}"

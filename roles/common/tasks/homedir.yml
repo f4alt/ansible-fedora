@@ -15,15 +15,10 @@
 - name: Copy custom rc files
   become: true
   copy:
-    src: "files/{{ item }}"
+    src: "files/config/{{ item }}"
     dest: "{{ ansible_env.HOME }}/{{ item }}"
     owner: "{{ ansible_user }}"
     group: "{{ ansible_user }}"
     mode: '0644'
-  loop:
-    - ".bashrc"
-    - ".bash_aliases"
-    - ".tmux.conf"
-    - ".tmux.conf.local"
-    - ".tmux-pane-border.sh"
-    - ".gitconfig"
+  with_fileglob:
+    - "files/config/*"
