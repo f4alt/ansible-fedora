@@ -9,7 +9,6 @@
     disable_gpg_check: yes
 
 - import_tasks: self_sign_key.yml
-  when: vm_testing is not defined
 
 - name: Reboot 1
   debug:

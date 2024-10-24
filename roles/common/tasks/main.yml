@@ -6,6 +6,7 @@
   - import_tasks: gen_sshkeys.yml
   - import_tasks: displaylink_driver.yml
   - import_tasks: nvidia_driver.yml
+    when: vm_testing is not defined
   become: yes
 
 # tasks without sudo
