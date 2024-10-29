@@ -13,4 +13,5 @@
 - block:
   - import_tasks: kde_theme.yml
   - import_tasks: homedir.yml
+  - import_tasks: nvim_config.yml
   become: no

@@ -133,9 +133,10 @@ ForegroundPositive=39,174,96
 ForegroundVisited=120,120,120
 
 [General]
-ColorSchemeHash=f13a5f93a8d2186748a87eaf56ec9fcef24073d5
+ColorSchemeHash=888f558ddb41ce5656c7b32ba0fcc1916eca895f
 XftHintStyle=hintslight
-XftSubPixel=rgb
+XftSubPixel=none
+fixed=Noto Sans,14,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 font=Noto Sans,14,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 menuFont=Noto Sans,14,-1,5,400,0,0,0,0,0,0,0,0,0,0,1
 smallestReadableFont=Noto Sans,12,-1,5,400,0,0,0,0,0,0,0,0,0,0,1

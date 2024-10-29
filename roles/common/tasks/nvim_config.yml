@@ -1,0 +1,16 @@
+# - name: Ensure .config/nvim dir exists
+#   file:
+#     path: "{{ ansible_env.HOME }}/.config/nvim"
+#     recurse: true
+#     state: directory
+#     owner: "{{ ansible_user }}"
+#     group: "{{ ansible_user }}"
+#     mode: '0644'
+
+- name: Copy nvim config files
+  copy:
+    src: "files/nvim/"
+    dest: "{{ ansible_env.HOME }}/.config/nvim/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0644'
