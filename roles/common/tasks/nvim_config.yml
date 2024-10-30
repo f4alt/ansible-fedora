@@ -1,11 +1,15 @@
-# - name: Ensure .config/nvim dir exists
-#   file:
-#     path: "{{ ansible_env.HOME }}/.config/nvim"
-#     recurse: true
-#     state: directory
-#     owner: "{{ ansible_user }}"
-#     group: "{{ ansible_user }}"
-#     mode: '0644'
+- name: Create dir for nerd font
+  file:
+    path: "{{ ansible_env.HOME }}/.local/share/fonts/JetBrainsMono"
+    recurse: true
+    state: directory
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
+    mode: '0777'
+
+- name: Unzip nerd not for icons
+  become_user: "{{ ansible_user }}"
+  command: unzip "files/JetBrainsMono.zip" -d "{{ ansible_env.HOME }}/.local/share/fonts/JetBrainsMono"
 
 - name: Copy nvim config files
   copy:
