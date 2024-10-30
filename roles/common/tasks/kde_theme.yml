@@ -28,6 +28,11 @@
     executable: /bin/bash
   become_user: "{{ ansible_user }}"
 
+- name: Apply lookandfeel McMojave
+  shell: |
+    lookandfeeltool -a com.github.vinceliuice.McMojave
+  become_user: "{{ ansible_user }}"
+
 - name: Copy theme configuration files
   copy:
     src: "{{ item.src }}"
@@ -51,9 +56,8 @@
     - src: files/theme/penguin.png
       dest: "{{ ansible_env.HOME }}/.local/share/wallpapers/penguin.png"
 
-- name: Apply lookandfeel McMojave
+- name: Restart plasmashell
   shell: |
-    lookandfeeltool -a com.github.vinceliuice.McMojave
     timeout 5 kquitapp5 plasmashell
     pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x plasmashell
     pgrep -U $USER -x plasmashell &>/dev/null && pkill -U $USER -x -9 plasmashell
