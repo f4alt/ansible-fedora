@@ -7,9 +7,15 @@
     group: "{{ ansible_user }}"
     mode: '0777'
 
-- name: Unzip nerd not for icons
-  become_user: "{{ ansible_user }}"
-  command: unzip "files/JetBrainsMono.zip" -d "{{ ansible_env.HOME }}/.local/share/fonts/JetBrainsMono"
+# - name: Unzip nerd not for icons
+#   become_user: "{{ ansible_user }}"
+#   command: unzip "files/JetBrainsMono.zip" -d "{{ ansible_env.HOME }}/.local/share/fonts/JetBrainsMono"
+- name: Copy nerd font files
+  copy:
+    src: "files/JetBrainsMono/"
+    dest: "{{ ansible_env.HOME }}/.local/share/fonts/JetBrainsMono/"
+    owner: "{{ ansible_user }}"
+    group: "{{ ansible_user }}"
 
 - name: Copy nvim config files
   copy:
