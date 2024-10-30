@@ -70,4 +70,5 @@
       - make
       - g++
       - gcc
+      - docker
     state: present
