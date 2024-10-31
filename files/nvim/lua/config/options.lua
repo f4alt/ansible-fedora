@@ -11,4 +11,4 @@ vim.api.nvim_create_autocmd("BufEnter", {
   desc = "Disable New Line Comment",
 })
 
-vim.b.minipairs_disable = true
+vim.g.minipairs_disable = true
